@@ -1,4 +1,4 @@
-1. git clone https://github.com/onesarumaha/persediaan-barang.git
+1. git clone https://github.com/onesarumaha/persediaanbarang.git
 2. composer install
 3. npm install && npm run dev
 4. npm run dev
