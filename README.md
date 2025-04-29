@@ -4,3 +4,6 @@
 4. npm run dev
 5. php artisan migrate (pastikan db sudah ada di phpmyadmin)
 6. php artisan serve
+7. php artisan db:seed --class=UserSeeder
+    email : admin@gmail.com
+    pass : 123456
