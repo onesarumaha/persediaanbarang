@@ -4,30 +4,167 @@
 
 @section('content')
 <div class="col-sm-12">
-    <div class="card">
-        <div class="card-header">
-            <h5>Hello csadadard</h5>
-            <div class="card-header-right">
-                <div class="btn-group card-option">
-                    <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="feather icon-more-horizontal"></i>
-                    </button>
-                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                        <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a>
-                        </li>
-                        <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
-                        <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
-                        <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
-                    </ul>
+    <div class="row">
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card prod-p-card bg-c-red">
+                <div class="card-body">
+                    <div class="row align-items-center m-b-25">
+                        <div class="col">
+                            <h6 class="m-b-5 text-white">Total Profit</h6>
+                            <h3 class="m-b-0 text-white">$1,783</h3>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-money-bill-alt text-c-red f-18"></i>
+                        </div>
+                    </div>
+                    <p class="m-b-0 text-white"><span class="label label-danger m-r-10">+11%</span>From Previous Month</p>
                 </div>
             </div>
         </div>
-        <div class="card-body">
-            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum."
-            </p>
+        <div class="col-xl-3 col-md-6">
+            <div class="card prod-p-card bg-c-blue">
+                <div class="card-body">
+                    <div class="row align-items-center m-b-25">
+                        <div class="col">
+                            <h6 class="m-b-5 text-white">Total Orders</h6>
+                            <h3 class="m-b-0 text-white">15,830</h3>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-database text-c-blue f-18"></i>
+                        </div>
+                    </div>
+                    <p class="m-b-0 text-white"><span class="label label-primary m-r-10">+12%</span>From Previous Month</p>
+                </div>
+            </div>
         </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card prod-p-card bg-c-green">
+                <div class="card-body">
+                    <div class="row align-items-center m-b-25">
+                        <div class="col">
+                            <h6 class="m-b-5 text-white">Average Price</h6>
+                            <h3 class="m-b-0 text-white">$6,780</h3>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign text-c-green f-18"></i>
+                        </div>
+                    </div>
+                    <p class="m-b-0 text-white"><span class="label label-success m-r-10">+52%</span>From Previous Month</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card prod-p-card bg-c-yellow">
+                <div class="card-body">
+                    <div class="row align-items-center m-b-25">
+                        <div class="col">
+                            <h6 class="m-b-5 text-white">Product Sold</h6>
+                            <h3 class="m-b-0 text-white">6,784</h3>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-tags text-c-yellow f-18"></i>
+                        </div>
+                    </div>
+                    <p class="m-b-0 text-white"><span class="label label-warning m-r-10">+52%</span>From Previous Month</p>
+                </div>
+            </div>
+        </div>
+        <!-- product profit end -->
+        <div class="col-md-12 col-xl-4">
+            <div class="card card-social">
+                <div class="card-block border-bottom">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
+                            <i class="fab fa-facebook-f text-primary f-36"></i>
+                        </div>
+                        <div class="col text-right">
+                            <h3>12,281</h3>
+                            <h5 class="text-c-blue mb-0">+7.2% <span class="text-muted">Total Likes</span></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-block">
+                    <div class="row align-items-center justify-content-center card-active">
+                        <div class="col-6">
+                            <h6 class="text-center m-b-10"><span class="text-muted m-r-5">Target:</span>35,098</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-c-blue" role="progressbar" style="width:60%;height:6px;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Duration:</span>350</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-c-green" role="progressbar" style="width:45%;height:6px;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <div class="card card-social">
+                <div class="card-block border-bottom">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
+                            <i class="fab fa-twitter text-c-info f-36"></i>
+                        </div>
+                        <div class="col text-right">
+                            <h3>11,200</h3>
+                            <h5 class="text-c-info mb-0">+6.2% <span class="text-muted">Total Likes</span></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-block">
+                    <div class="row align-items-center justify-content-center card-active">
+                        <div class="col-6">
+                            <h6 class="text-center m-b-10"><span class="text-muted m-r-5">Target:</span>34,185</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-c-blue" role="progressbar" style="width:40%;height:6px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Duration:</span>800</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-c-green" role="progressbar" style="width:70%;height:6px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <div class="card card-social">
+                <div class="card-block border-bottom">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
+                            <i class="fab fa-google-plus-g text-c-red f-36"></i>
+                        </div>
+                        <div class="col text-right">
+                            <h3>10,500</h3>
+                            <h5 class="text-c-red mb-0">+5.9% <span class="text-muted">Total Likes</span></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-block">
+                    <div class="row align-items-center justify-content-center card-active">
+                        <div class="col-6">
+                            <h6 class="text-center m-b-10"><span class="text-muted m-r-5">Target:</span>25,998</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-c-blue" role="progressbar" style="width:80%;height:6px;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Duration:</span>900</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-c-green" role="progressbar" style="width:50%;height:6px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
     </div>
 </div>
 @endsection
