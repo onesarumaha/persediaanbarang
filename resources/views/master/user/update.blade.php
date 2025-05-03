@@ -1,4 +1,6 @@
-@extends('layout.main')
+@component ('')
+
+@endcomponent@extends('layout.main')
 
 @section('title', 'Dashboard')
 
@@ -33,7 +35,7 @@
             </div>
         </div>
     </div>
-  
+
 </div>
-                               
+
 @endsection
