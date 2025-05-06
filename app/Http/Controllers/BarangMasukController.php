@@ -1,25 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Master;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\HistoryBarangModel;
-use App\Models\Master\BarangModel;
-use App\Traits\HasStock;
 use Illuminate\Http\Request;
 
-class BarangController extends Controller
+class BarangMasukController extends Controller
 {
-    use HasStock;
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $title = 'Barang';
-        $data = BarangModel::all();
-        return view('master.barang.index', compact('title', 'data'));
+        $title = 'Barang Masuk';
+        return view('transaksi.in.index', compact('title'));
     }
 
     /**
@@ -69,22 +62,4 @@ class BarangController extends Controller
     {
         //
     }
-
-    public function getStock($id)
-    {
-        $barang = BarangModel::find($id);
-
-        if (!$barang) {
-            return response()->json(['stock' => 0]);
-        }
-
-        return response()->json(['stock' => $barang->stok]);
-    }
-
-    public static function updateStock($barangId, $quantity, $type = 'Transaksi', $direction = 'in', $referenceId = null, $description = null)
-    {
-        (new self)->updateStock($barangId, $quantity, $type, $direction, $referenceId, $description);
-    }
-    
-
 }
