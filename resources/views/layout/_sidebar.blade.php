@@ -23,9 +23,14 @@
                             <li class=""><a href="bc_breadcrumb-pagination.html" class="">Supplier</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="form_elements.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Transaksi</span></a>
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Transaksi</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{{url('/barang-keluar')}}" class="">Barang Keluar</a></li>
+                            <li class=""><a href="{{url('/barang-masuk')}}" class="">Barang Masuk</a></li>
+                        </ul>
                     </li>
+                    
                 </ul>
 
             </div>
