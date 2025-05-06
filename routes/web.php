@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/barang-keluar/create', [BarangKeluarController::class, 'create'])->name('barang-keluar.create');
     Route::post('/barang-keluar/store', [BarangKeluarController::class, 'store'])->name('barang-keluar.store');
     Route::get('/barang-keluar/view/{id}', [BarangKeluarController::class, 'show'])->name('barang-keluar.view');
+    Route::get('/barang-keluar/edit/{id}', [BarangKeluarController::class, 'edit'])->name('barang-keluar.edit');
+    Route::get('/barang-keluar/update/{id}', [BarangKeluarController::class, 'update'])->name('barang-keluar.update');
     Route::get('/barang/{id}/stock', [BarangController::class, 'getStock']);
 
 });

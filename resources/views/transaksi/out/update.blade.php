@@ -6,7 +6,7 @@
 <div class="col-md-12">
     <div class="row">
         <div class="col-sm-12">
-            <form action="{{route('barang-keluar.store')}}" method="POST" id="form-barang">
+            <form action="{{route('barang-keluar.update',  $transaksi->id)}}" method="POST" id="form-barang">
                 @csrf
                 <div class="card">
                     <div class="card-header">

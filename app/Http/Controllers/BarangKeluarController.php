@@ -36,8 +36,6 @@ class BarangKeluarController extends Controller
      */
     public function store(BarangKeluarRequest $request)
     {
-        // dd($request->all());
-
         DB::beginTransaction();
         try {
             $model = BarangKeluarModel::create($request->all());
@@ -71,7 +69,10 @@ class BarangKeluarController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $title = 'Update';
+        $transaksi = BarangKeluarModel::findOrFail($id); 
+        $data = BarangModel::all();
+        return view('transaksi.out.update', compact('title', 'data', 'transaksi'));
     }
 
     /**
