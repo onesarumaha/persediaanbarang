@@ -30,12 +30,16 @@
                             <td>{{$item->no_transaksi}}</td>
                             <td>{{$item->tanggal}}</td>
                             <td>{{$item->deskripsi}}</td>
-                            <td>{{$item->status}}</td>
+                            <td>
+                                <span class="badge badge-pill badge-success">
+                                    {{ $item->status === 'TR-DONE' ? 'selesai' : $item->status }}
+                                </span>
+                            </td>
                             <td>
                                 <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ route('barang-keluar.view', $item->id) }}">View</a>
-                                    <a class="dropdown-item" href="#!">Update</a>
+                                    <a class="dropdown-item" href="{{ route('barang-keluar.edit', $item->id) }}">Update</a>
                                     <a class="dropdown-item" href="#!">Delete</a>
                                 </div>
                             </td>
