@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
+use App\Models\HistoryBarangModel;
 use App\Models\Master\BarangModel;
+use App\Traits\HasStock;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
+    use HasStock;
+
     /**
      * Display a listing of the resource.
      */
@@ -97,5 +101,22 @@ class BarangController extends Controller
 
         return redirect()->route('barang.index')->with('success', 'Barang deleted successfully.');
     }
+
+    public function getStock($id)
+    {
+        $barang = BarangModel::find($id);
+
+        if (!$barang) {
+            return response()->json(['stock' => 0]);
+        }
+
+        return response()->json(['stock' => $barang->stok]);
+    }
+
+    public static function updateStock($barangId, $quantity, $type = 'Transaksi', $direction = 'in', $referenceId = null, $description = null)
+    {
+        (new self)->updateStock($barangId, $quantity, $type, $direction, $referenceId, $description);
+    }
+
 
 }

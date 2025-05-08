@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BarangController;
 use App\Http\Controllers\Master\UserController;
@@ -28,10 +29,21 @@ Route::put('/barang/{id}', [BarangController::class, 'update']);
 
 
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // barang keluar
+    Route::get('/barang-keluar', [BarangKeluarController::class, 'index'])->name('barang-keluar.index');
+    Route::get('/barang-keluar/create', [BarangKeluarController::class, 'create'])->name('barang-keluar.create');
+    Route::post('/barang-keluar/store', [BarangKeluarController::class, 'store'])->name('barang-keluar.store');
+    Route::get('/barang-keluar/view/{id}', [BarangKeluarController::class, 'show'])->name('barang-keluar.view');
+    Route::get('/barang-keluar/edit/{id}', [BarangKeluarController::class, 'edit'])->name('barang-keluar.edit');
+    Route::get('/barang-keluar/update/{id}', [BarangKeluarController::class, 'update'])->name('barang-keluar.update');
+    Route::get('/barang/{id}/stock', [BarangController::class, 'getStock']);
+
 });
 
 
