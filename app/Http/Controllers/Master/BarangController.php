@@ -27,7 +27,8 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Barang';
+        return view('master.barang.create', compact('title'));
     }
 
     /**
@@ -35,7 +36,18 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode_barang' => 'required',
+            'nama_barang' => 'required',
+            'deskripsi' => 'required',
+            'satuan' => 'required',
+            'harga' => 'required|numeric',
+            'stok' => 'required|numeric'
+        ]);
+
+        BarangModel::create($request->all());
+
+        return redirect()->route('barang.index')->with('success', 'Barang created successfully.');
     }
 
     /**
@@ -43,7 +55,9 @@ class BarangController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $title = 'Detail Barang';
+        $data = BarangModel::findOrFail($id);
+        return view('master.barang.show', compact('title', 'data'));
     }
 
     /**
@@ -51,7 +65,9 @@ class BarangController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $title = 'Edit Barang';
+        $data = BarangModel::findOrFail($id);
+        return view('master.barang.edit', compact('title', 'data'));
     }
 
     /**
@@ -59,7 +75,20 @@ class BarangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $barang = BarangModel::findOrFail($id);
+
+        $request->validate([
+            'kode_barang' => 'required',
+            'nama_barang' => 'required',
+            'deskripsi' => 'required',
+            'satuan' => 'required',
+            'harga' => 'required|numeric',
+            'stok' => 'required|numeric'
+        ]);
+
+        $barang->update($request->all());
+
+        return redirect('/barang')->with('success', 'Barang berhasil diperbarui.');
     }
 
     /**
@@ -67,7 +96,10 @@ class BarangController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $barang = BarangModel::findOrFail($id);
+        $barang->delete();
+
+        return redirect()->route('barang.index')->with('success', 'Barang deleted successfully.');
     }
 
     public function getStock($id)
@@ -85,6 +117,6 @@ class BarangController extends Controller
     {
         (new self)->updateStock($barangId, $quantity, $type, $direction, $referenceId, $description);
     }
-    
+
 
 }
