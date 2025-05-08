@@ -1,12 +1,14 @@
 @extends('layout.main')
 @section('title', 'Dashboard')
+@section('title', $title)
+
 
 @section('content')
     <div class="col-md-12">
         <div class="card">
             <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">{{ $title }}</h5>
-                <a href="{{ url('/barang/create') }}" class="btn btn-success btn-sm" data-togg le="tooltip">
+                <a href="{{ url('/barang/create') }}" class="btn btn-success btn-sm" data-toggle="tooltip">
                     <span class="icon text-white-50">
                         <i class="fas fa-plus"></i>
                     </span>
@@ -64,6 +66,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-end mt-3">
+                        {{ $data->links() }}
+                    </div>
                 </div>
             </div>
         </div>
