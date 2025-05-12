@@ -47,7 +47,7 @@ class BarangKeluarModel extends Model
     }
 
 
-    public function barangMasukItem()
+    public function barangKeluarItems()
     {
         return $this->hasMany(BarangKeluarItemModel::class, 'transaksi_id');
     }

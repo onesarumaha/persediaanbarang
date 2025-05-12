@@ -23,10 +23,10 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    @foreach ($data as $item)
+                    @foreach ($data as $index => $item)
                     <tbody>
                         <tr>
-                            <td>{{$loop->iteration}}</td>
+                            <td>{{$data->firstItem() + $index}}</td>
                             <td>{{$item->no_transaksi}}</td>
                             <td>{{$item->tanggal}}</td>
                             <td>{{$item->deskripsi}}</td>
@@ -36,17 +36,35 @@
                                 </span>
                             </td>
                             <td>
-                                <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('barang-keluar.view', $item->id) }}">View</a>
-                                    <a class="dropdown-item" href="{{ route('barang-keluar.edit', $item->id) }}">Update</a>
-                                    <a class="dropdown-item" href="#!">Delete</a>
+                                <div class="btn-group">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                        data-toggle="dropdown">
+                                        Action
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{ url('/barang-keluar/' . $item->id . '/edit') }}">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <form action="{{ url('/barang-keluar/' . $item->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="dropdown-item"
+                                                onclick="return confirm('Are you sure?')">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                        </form>
+
+                                        <a class="dropdown-item" href="{{ url('/barang-keluar/' . $item->id) }}">
+                                            <i class="fas fa-eye"></i> View
+                                        </a>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                     @endforeach
                 </table>
+                {{ $data->links() }}
             </div>
         </div>
     </div>
