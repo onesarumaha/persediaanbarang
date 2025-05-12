@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BarangController;
+use App\Http\Controllers\Master\SupplierController;
 use App\Http\Controllers\Master\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -26,8 +27,18 @@ Route::post('/barang', [BarangController::class, 'store'])->name('barang');
 Route::get('/barang/{id}/edit', [BarangController::class, 'edit']);
 Route::put('/barang/{id}', [BarangController::class, 'update']);
 
-
-
+// supplier
+Route::get('/supplier/create', [SupplierController::class, 'create'])->name('supplier.create');
+Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
+Route::post('/supplier', [SupplierController::class, 'store'])->name('suppliers.store');
+Route::get('/supplier/{id}', [SupplierController::class, 'show'])->name('supplier.view');
+Route::delete('/supplier/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
+Route::post('/supplier', [BarangController::class, 'store'])->name('supplier.store');
+Route::get('/supplier/{id}', [SupplierController::class, 'show'])->name('supplier.view');
+Route::get('/supplier/{id}/edit', [SupplierController::class, 'edit']);
+Route::put('/supplier/{id}', [SupplierController::class, 'update']);
+Route::post('/supplier', [SupplierController::class, 'store'])->name('supplier.store');
+Route::get('/supplier/{id}', [SupplierController::class, 'show'])->name('supplier.view');
 
 
 Route::middleware('auth')->group(function () {
