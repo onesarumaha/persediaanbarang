@@ -30,7 +30,13 @@
                             <li class=""><a href="{{url('/barang-masuk')}}" class="">Barang Masuk</a></li>
                         </ul>
                     </li>
-                    
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Laporan</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{{url('/barang-w')}}" class="">Barang Keluar</a></li>
+                            <li class=""><a href="{{url('/barang-a')}}" class="">Barang Masuk</a></li>
+                        </ul>
+                    </li>
                 </ul>
 
             </div>

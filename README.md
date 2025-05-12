@@ -7,3 +7,4 @@
 7. php artisan db:seed --class=UserSeeder
 8. email : admin@gmail.com
     pass : 123456
+9. https://realrashid.github.io/sweet-alert/demo 

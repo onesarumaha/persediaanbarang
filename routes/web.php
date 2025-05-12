@@ -39,9 +39,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/barang-keluar', [BarangKeluarController::class, 'index'])->name('barang-keluar.index');
     Route::get('/barang-keluar/create', [BarangKeluarController::class, 'create'])->name('barang-keluar.create');
     Route::post('/barang-keluar/store', [BarangKeluarController::class, 'store'])->name('barang-keluar.store');
-    Route::get('/barang-keluar/view/{id}', [BarangKeluarController::class, 'show'])->name('barang-keluar.view');
-    Route::get('/barang-keluar/edit/{id}', [BarangKeluarController::class, 'edit'])->name('barang-keluar.edit');
-    Route::get('/barang-keluar/update/{id}', [BarangKeluarController::class, 'update'])->name('barang-keluar.update');
+    Route::get('/barang-keluar/{id}/view', [BarangKeluarController::class, 'show'])->name('barang-keluar.view');
+    Route::get('/barang-keluar/{id}/edit', [BarangKeluarController::class, 'edit'])->name('barang-keluar.edit');
+    Route::post('/barang-keluar/{id}', [BarangKeluarController::class, 'update'])->name('barang-keluar.update');
+    Route::delete('/barang-keluar/{id}', [BarangKeluarController::class, 'destroy'])->name('barang-keluar.delete');
     Route::get('/barang/{id}/stock', [BarangController::class, 'getStock']);
 
 });
