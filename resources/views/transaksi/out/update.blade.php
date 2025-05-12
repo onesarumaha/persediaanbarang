@@ -17,22 +17,25 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="tanggal">Tanggal</label>
-                                    <input type="date" class="form-control" name="tanggal" value="{{ old('tanggal') }}">
+                                    <input type="date" class="form-control" name="tanggal" value="{{ old('tanggal', $transaksi->tanggal) }}">
                                     @if ($errors->has("tanggal")) 
                                         @foreach($errors->get("tanggal") as $key => $message)
                                         <div class="text-danger"><small>{{ $message }}</small></div>
                                         @endforeach
                                     @endif
                                 </div>
+                                
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="type">Dibuat oleh </label>
                                     <input type="text" class="form-control" placeholder="{{ Auth::user()->name }}" readonly>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="deskripsi">Deskripsi</label>
-                                    <textarea class="form-control" rows="3" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                                    <textarea class="form-control" rows="3" name="deskripsi">{{ old('deskripsi', $transaksi->deskripsi) }}</textarea>
                                     @if ($errors->has("deskripsi")) 
                                         @foreach($errors->get("deskripsi") as $key => $message)
                                         <div class="text-danger"><small>{{ $message }}</small></div>
@@ -51,49 +54,93 @@
                     </div>
                     <div class="card-body">
                         <div class="item-wrapper">
-                            <div class="row item-group mb-2">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Nama Barang</label>
-                                        <select class="form-control select-barang" name="barang_items[0][barang_id]">
-                                            <option value="">-- Pilih Barang --</option>
-                                            @foreach($data as $item)
-                                                <option value="{{ $item->id }}" {{ old('barang_items.0.barang_id') == $item->id ? 'selected' : '' }}>{{ $item->nama_barang }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('barang_items.0.barang_id')
-                                            <div class="text-danger"><small>{{ $message }}</small></div>
-                                        @enderror
+                            @forelse($transaksiItems as $index => $item)
+                                <div class="row item-group mb-2">
+                                    <input type="hidden" name="barang_items[{{ $index }}][id]" value="{{ $item->id }}" />
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Nama Barang</label>
+                                            <select class="form-control select-barang" name="barang_items[{{ $index }}][barang_id]">
+                                                <option value="">-- Pilih Barang --</option>
+                                                @foreach($data as $barang)
+                                                    <option value="{{ $barang->id }}" {{ old('barang_items.'.$index.'.barang_id', $item->barang_id) == $barang->id ? 'selected' : '' }}>{{ $barang->nama_barang }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('barang_items.'.$index.'.barang_id')
+                                                <div class="text-danger"><small>{{ $message }}</small></div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Stock</label>
+                                            <input type="text" class="form-control stock-input" readonly style="padding: 0.2rem 0.4rem; font-size: 15px; height: 30px; line-height: 1.2;" value="{{ $item->barang->stock ?? '' }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Quantity</label>
+                                            <input type="text" class="form-control quantity-input" name="barang_items[{{ $index }}][quantity]" value="{{ old('barang_items.'.$index.'.quantity', $item->quantity) }}" style="padding: 0.2rem 0.4rem; font-size: 15px; height: 30px; line-height: 1.2;">
+                                            @error('barang_items.'.$index.'.quantity')
+                                                <div class="text-danger"><small>{{ $message }}</small></div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Note</label>
+                                            <textarea class="form-control" rows="0" name="barang_items[{{ $index }}][deskripsi]" style="padding: 0.2rem 0.4rem; font-size: 15px; height: 30px; line-height: 1.2;">{{ old('barang_items.'.$index.'.deskripsi', $item->deskripsi) }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 d-flex align-items-end mb-3">
+                                        <button type="button" class="btn btn-danger btn-sm btn-remove"><b>Hapus</b></button>
+                                    </div>
+                                    <input type="hidden" name="barang_items[{{ $index }}][id]" value="{{ $item->id }}">
+                                </div>
+                            @empty
+                                <div class="row item-group mb-2">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Nama Barang</label>
+                                            <select class="form-control select-barang" name="barang_items[0][barang_id]">
+                                                <option value="">-- Pilih Barang --</option>
+                                                @foreach($data as $barang)
+                                                    <option value="{{ $barang->id }}" {{ old('barang_items.0.barang_id') == $barang->id ? 'selected' : '' }}>{{ $barang->nama_barang }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('barang_items.0.barang_id')
+                                                <div class="text-danger"><small>{{ $message }}</small></div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Stock</label>
+                                            <input type="text" class="form-control stock-input" readonly style="padding: 0.2rem 0.4rem; font-size: 15px; height: 30px; line-height: 1.2;">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Quantity</label>
+                                            <input type="text" class="form-control quantity-input" name="barang_items[0][quantity]" value="{{ old('barang_items.0.quantity') }}" style="padding: 0.2rem 0.4rem; font-size: 15px; height: 30px; line-height: 1.2;">
+                                            @error('barang_items.0.quantity')
+                                                <div class="text-danger"><small>{{ $message }}</small></div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Note</label>
+                                            <textarea class="form-control" rows="0" name="barang_items[0][deskripsi]" style="padding: 0.2rem 0.4rem; font-size: 15px; height: 30px; line-height: 1.2;">{{ old('barang_items.0.deskripsi') }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 d-flex align-items-end mb-3">
+                                        <button type="button" class="btn btn-danger btn-sm btn-remove"><b>Hapus</b></button>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label>Stock</label>
-                                        <input type="text" class="form-control stock-input" readonly style="padding: 0.2rem 0.4rem; font-size: 15px; height: 30px; line-height: 1.2;">
-
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label>Quantity</label>
-                                        <input type="text" class="form-control quantity-input" name="barang_items[0][quantity]" value="{{ old('barang_items.0.quantity') }}" style="padding: 0.2rem 0.4rem; font-size: 15px; height: 30px; line-height: 1.2;">
-                                        @error('barang_items.0.quantity')
-                                            <div class="text-danger"><small>{{ $message }}</small></div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label>Note</label>
-                                        <textarea class="form-control" rows="0" name="barang_items[0][deskripsi]" style="padding: 0.2rem 0.4rem; font-size: 15px; height: 30px; line-height: 1.2;">{{ old('barang_items.0.deskripsi') }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 d-flex align-items-end mb-3">
-                                    <button type="button" class="btn btn-danger btn-sm btn-remove"><b>Hapus</b></button>
-                                </div>
-                            </div>
+                            @endforelse
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                        <button type="submit" class="btn btn-primary btn-sm mt-3">Simpan</button>
                     </div>
                 </div>
             </form>
@@ -104,7 +151,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    let index = 1;
+    let index = 100;
 
     function createItemTemplate(index) {
         return `

@@ -24,12 +24,14 @@
                                         @endforeach
                                     @endif
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="type">Dibuat oleh </label>
                                     <input type="text" class="form-control" placeholder="{{ Auth::user()->name }}" readonly>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="deskripsi">Deskripsi</label>
                                     <textarea class="form-control" rows="3" name="deskripsi">{{ old('deskripsi') }}</textarea>
@@ -93,7 +95,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                        <button type="submit" class="btn btn-primary btn-sm mt-3">Simpan</button>
                     </div>
                 </div>
             </form>
@@ -104,7 +106,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    let index = 1;
+    let index = 100;
 
     function createItemTemplate(index) {
         return `
