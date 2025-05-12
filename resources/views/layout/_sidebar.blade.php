@@ -20,7 +20,7 @@
                         <ul class="pcoded-submenu">
                             <li class=""><a href="{{url('/user')}}" class="">User</a></li>
                             <li class=""><a href="{{url('/barang')}}" class="">Barang</a></li>
-                            <li class=""><a href="bc_breadcrumb-pagination.html" class="">Supplier</a></li>
+                            <li class=""><a href="{{url('/supplier')}}" class="">Supplier</a></li>
                         </ul>
                     </li>
                     <li class="nav-item pcoded-hasmenu">
@@ -30,7 +30,7 @@
                             <li class=""><a href="{{url('/barang-masuk')}}" class="">Barang Masuk</a></li>
                         </ul>
                     </li>
-                    
+
                 </ul>
 
             </div>
