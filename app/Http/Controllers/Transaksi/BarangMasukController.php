@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Transaksi;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Transaksi\BarangMasukRequest;
 use App\Models\Master\BarangModel;
+use App\Models\Master\SupplierModel;
 use App\Models\Transaksi\BarangMasukModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,8 @@ class BarangMasukController extends Controller
     {
         $title = 'Create Barang Masuk';
         $data = BarangModel::all();
-        return view('transaksi.in.create', compact('title', 'data'));
+        $supplier = SupplierModel::all();
+        return view('transaksi.in.create', compact('title', 'data', 'supplier'));
     }
 
     /**
@@ -74,10 +76,11 @@ class BarangMasukController extends Controller
     public function edit(string $id)
     {
         $title = 'Update';
+        $supplier = SupplierModel::all();
         $transaksi = BarangMasukModel::findOrFail($id); 
         $transaksiItems = $transaksi->barangMasukItems()->get(); 
         $data = BarangModel::all();
-        return view('transaksi.in.update', compact('title', 'data', 'transaksi', 'transaksiItems'));
+        return view('transaksi.in.update', compact('title', 'data', 'transaksi', 'transaksiItems', 'supplier'));
     }
 
     /**
