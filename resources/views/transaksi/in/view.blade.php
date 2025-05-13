@@ -11,12 +11,14 @@
                     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Info</a>
                 </li>
                 <li class="nav-item ml-auto">
-                    <a href="{{ url('/barang-keluar') }}" class="btn btn-sm btn-danger">
+                    <a href="{{ route('barang-masuk.index') }}" class="btn btn-sm btn-danger">
                         <i class="fas fa-arrow-left mr-1"></i> Kembali
                     </a>
-                    <a href="{{ route('barang-keluar.edit', ['id' => $data->id]) }}" class="btn btn-sm btn-warning">
+                    <a href="{{ route('barang-masuk.edit', ['id' => $data->id]) }}" class="btn btn-sm btn-warning">
                         <i class="fas fa-edit"></i> Edit
                     </a>
+
+
                 </li>
             </ul>
 
@@ -54,7 +56,7 @@
                             <th>Quantity</th>
                             <th>Note</th>
                         </tr>
-                        @foreach($data->barangKeluarItems as $item)
+                        @foreach($data->barangMasukItems as $item)
                         <tbody>
                             <td>{{$item->barang->nama_barang}}</td>
                             <td>{{$item->quantity}}</td>
