@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('kode_barang');
             $table->string('nama_barang');
             $table->text('deskripsi');
-            $table->string('satuan');
+            $table->enum('satuan', ['pcs', 'box', 'rol', 'pak']);
             $table->integer('harga');
             $table->integer('stok');
             $table->timestamps();

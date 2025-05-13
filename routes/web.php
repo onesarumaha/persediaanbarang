@@ -18,27 +18,27 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
-Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.create');
-Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
-Route::get('/barang/{id}', [BarangController::class, 'show'])->name('barang.view');
-Route::delete('/barang/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
-Route::post('/barang', [BarangController::class, 'store'])->name('barang');
-Route::get('/barang/{id}/edit', [BarangController::class, 'edit']);
-Route::put('/barang/{id}', [BarangController::class, 'update']);
+
+Route::controller(BarangController::class)->group(function () {
+    Route::get('/barang', 'index')->name('barang.index');
+    Route::get('/barang/create', 'create')->name('barang.create');
+    Route::post('/barang', 'store')->name('barang.store');
+    Route::get('/barang/{id}', 'show')->name('barang.view');
+    Route::delete('/barang/{id}', 'destroy')->name('barang.destroy');
+    Route::get('/barang/{id}/edit', 'edit')->name('barang.edit');
+    Route::put('/barang/{id}', 'update')->name('barang.update');
+});
 
 // supplier
-Route::get('/supplier/create', [SupplierController::class, 'create'])->name('supplier.create');
-Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
-Route::post('/supplier', [SupplierController::class, 'store'])->name('suppliers.store');
-Route::get('/supplier/{id}', [SupplierController::class, 'show'])->name('supplier.view');
-Route::delete('/supplier/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
-Route::post('/supplier', [BarangController::class, 'store'])->name('supplier.store');
-Route::get('/supplier/{id}', [SupplierController::class, 'show'])->name('supplier.view');
-Route::get('/supplier/{id}/edit', [SupplierController::class, 'edit']);
-Route::put('/supplier/{id}', [SupplierController::class, 'update']);
-Route::post('/supplier', [SupplierController::class, 'store'])->name('supplier.store');
-Route::get('/supplier/{id}', [SupplierController::class, 'show'])->name('supplier.view');
+Route::prefix('supplier')->controller(SupplierController::class)->group(function () {
+    Route::get('/', 'index')->name('supplier.index');
+    Route::get('/create', 'create')->name('supplier.create');
+    Route::post('/', 'store')->name('supplier.store');
+    Route::get('/{id}', 'show')->name('supplier.view');
+    Route::get('/{id}/edit', 'edit')->name('supplier.edit');
+    Route::put('/{id}', 'update')->name('supplier.update');
+    Route::delete('/{id}', 'destroy')->name('supplier.destroy');
+});
 
 
 Route::middleware('auth')->group(function () {

@@ -13,7 +13,7 @@
                         Kembali</a>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('barang' ) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('barang.index' ) }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">

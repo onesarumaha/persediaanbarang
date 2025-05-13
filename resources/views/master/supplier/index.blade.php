@@ -64,7 +64,7 @@
                     </table>
 
                     {{-- Pagination --}}
-                    <div class="d-flex justify-content-end">
+                    <div class="justify-content-end">
                         {{ $data->links() }}
                     </div>
                 </div>
