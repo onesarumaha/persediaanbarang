@@ -20,7 +20,7 @@ class BarangKeluarController extends Controller
     public function index()
     {
         $title = 'Barang Keluar';
-        $data = BarangKeluarModel::latest()->paginate(10);
+        $data = BarangKeluarModel::where('type', 'IN')->latest()->paginate(10);
         return view('transaksi.out.index', compact('title', 'data'));
     }
 
@@ -83,54 +83,6 @@ class BarangKeluarController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    // public function update(BarangKeluarRequest $request, string $id)
-    // {
-    //     DB::beginTransaction();
-    //     try {
-    //         $transaksi = BarangKeluarModel::findOrFail($id);
-    //         $transaksi->update([
-    //             'tanggal' => $request->tanggal,
-    //             'deskripsi' => $request->deskripsi,
-    //         ]);
-
-    //         if ($request->has('barang_items')) {
-    //             $existingItemIds = [];
-                
-    //             foreach ($request->barang_items as $item) {
-    //                 if (isset($item['id']) && !empty($item['id'])) {
-    //                     $barangItem = BarangKeluarItemModel::findOrFail($item['id']);
-    //                     $barangItem->update([
-    //                         'barang_id' => $item['barang_id'],
-    //                         'quantity' => $item['quantity'],
-    //                         'deskripsi' => $item['deskripsi'] ?? null
-    //                     ]);
-                        
-    //                     $existingItemIds[] = $item['id'];
-    //                 } else {
-    //                     $transaksi->barangKeluarItems()->create([
-    //                         'barang_id' => $item['barang_id'],
-    //                         'quantity' => $item['quantity'],
-    //                         'deskripsi' => $item['deskripsi'] ?? null
-    //                     ]);
-    //                 }
-    //             }
-                
-    //             $transaksi->barangKeluarItems()
-    //                 ->whereNotIn('id', $existingItemIds);
-    //         }
-
-    //         DB::commit();
-
-    //         Alert::success('Berhasil', 'Barang Keluar berhasil diperbarui!');
-
-    //         return redirect()->route('barang-keluar.view', ['id' => $transaksi->id]);
-    //     } catch (\Exception $e) {
-    //         DB::rollback();
-    //         Log::error('Error update Barang Keluar : '.$e->getMessage());
-
-    //         return redirect()->back()->withErrors(['error' => 'Gagal memperbarui Barang Keluar: ' . $e->getMessage()]);
-    //     }
-    // }
 
     public function update(BarangKeluarRequest $request, $id)
     {
@@ -149,7 +101,6 @@ class BarangKeluarController extends Controller
                 ->filter()
                 ->all();
 
-                // dd($keyed);
         
             $barangKeluar->barangKeluarItems()->whereNotIn("id", $keyed)->delete();
         

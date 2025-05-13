@@ -54,7 +54,7 @@
                                             </button>
                                         </form>
 
-                                        <a class="dropdown-item" href="{{ url('/barang-keluar/' . $item->id) }}">
+                                        <a class="dropdown-item" href="{{ url('/barang-keluar/' . $item->id . '/view') }}">
                                             <i class="fas fa-eye"></i> View
                                         </a>
                                     </div>

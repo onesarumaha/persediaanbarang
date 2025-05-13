@@ -6,6 +6,7 @@ use App\Http\Controllers\Master\BarangController;
 use App\Http\Controllers\Master\SupplierController;
 use App\Http\Controllers\Master\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Transaksi\BarangMasukController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -55,6 +56,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/barang-keluar/{id}', [BarangKeluarController::class, 'update'])->name('barang-keluar.update');
     Route::delete('/barang-keluar/{id}', [BarangKeluarController::class, 'destroy'])->name('barang-keluar.delete');
     Route::get('/barang/{id}/stock', [BarangController::class, 'getStock']);
+
+    // barang masuk
+    Route::get('/barang-masuk', [BarangMasukController::class, 'index'])->name('barang-masuk.index');
+    Route::get('/barang-masuk/create', [BarangMasukController::class, 'create'])->name('barang-masuk.create');
+    Route::post('/barang-masuk/store', [BarangMasukController::class, 'store'])->name('barang-masuk.store');
+    Route::get('/barang-masuk/{id}', [BarangMasukController::class, 'show'])->name('barang-masuk.view');
+    Route::get('/barang-masuk/{id}/edit', [BarangMasukController::class, 'edit'])->name('barang-masuk.edit');
+    Route::put('/barang-masuk/{id}', [BarangMasukController::class, 'update'])->name('barang-masuk.update');
+    Route::delete('/barang-masuk/{id}', [BarangMasukController::class, 'destroy'])->name('barang-masuk.delete');
 
 });
 
