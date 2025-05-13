@@ -3,6 +3,7 @@
 namespace App\Models\Transaksi;
 
 use App\Models\Master\BarangModel;
+use App\Models\Master\SupplierModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -51,5 +52,10 @@ class BarangMasukModel extends Model
     public function barangMasukItems()
     {
         return $this->hasMany(BarangMasukItemModel::class, 'transaksi_id');
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(SupplierModel::class, 'supplier_id');
     }
 }

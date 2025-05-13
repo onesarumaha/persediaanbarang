@@ -33,7 +33,7 @@
                                     <input type="text" class="form-control" placeholder="{{ Auth::user()->name }}" readonly>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="deskripsi">Deskripsi</label>
                                     <textarea class="form-control" rows="3" name="deskripsi">{{ old('deskripsi', $transaksi->deskripsi) }}</textarea>
@@ -42,6 +42,19 @@
                                         <div class="text-danger"><small>{{ $message }}</small></div>
                                         @endforeach
                                     @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Supplier</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="supplier_id">
+                                        <option value="">Pilih Supplier</option>
+                                        @foreach($supplier as $sup)
+                                            <option value="{{ $sup->id }}" {{ $sup->id == $transaksi->supplier_id ? 'selected' : '' }}>
+                                                {{ $sup->nama_supplier }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>

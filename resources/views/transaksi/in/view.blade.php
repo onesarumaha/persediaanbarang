@@ -31,6 +31,10 @@
                             <td>{{ $data->no_transaksi }}</td>
                         </tr>
                         <tr>
+                            <th>Supplier</th>
+                            <td>{{ $data->supplier->nama_supplier ?? '-' }}</td>
+                        </tr>
+                        <tr>
                             <th>Deskripsi</th>
                             <td>{{ $data->deskripsi ?? '-' }}</td>
                         </tr>

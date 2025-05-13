@@ -18,6 +18,7 @@
                             <th>No</th>
                             <th>No Transaksi</th>
                             <th>Tanggal</th>
+                            <th>Supplier</th>
                             <th>Deskripsi</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -29,6 +30,7 @@
                             <td>{{$data->firstItem() + $index}}</td>
                             <td>{{$item->no_transaksi}}</td>
                             <td>{{$item->tanggal}}</td>
+                            <td>{{$item->supplier->nama_supplier}}</td>
                             <td>{{$item->deskripsi}}</td>
                             <td>
                                 <span class="badge badge-pill badge-success">

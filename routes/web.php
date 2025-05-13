@@ -15,11 +15,6 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-// master
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
-Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-
 Route::controller(BarangController::class)->group(function () {
     Route::get('/barang', 'index')->name('barang.index');
     Route::get('/barang/create', 'create')->name('barang.create');
@@ -65,6 +60,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/barang-masuk/{id}/edit', [BarangMasukController::class, 'edit'])->name('barang-masuk.edit');
     Route::put('/barang-masuk/{id}', [BarangMasukController::class, 'update'])->name('barang-masuk.update');
     Route::delete('/barang-masuk/{id}', [BarangMasukController::class, 'destroy'])->name('barang-masuk.delete');
+
+    // master
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
+    Route::get('/user/view/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    
+    
 
 });
 
