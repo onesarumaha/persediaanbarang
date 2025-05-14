@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Transaksi\BarangMasukItemModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,12 @@ class HistoryBarangModel extends Model
             $model->user_id = Auth::id();
             $model->created_at = now();
         });
-    
        
+    }
+
+    public function parent() 
+    {
+        return $this->belongsTo(BarangMasukItemModel::class, 'id');
+
     }
 }

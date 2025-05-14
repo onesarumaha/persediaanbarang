@@ -7,6 +7,9 @@ use App\Models\HistoryBarangModel;
 use App\Models\Master\BarangModel;
 use App\Traits\HasStock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class BarangController extends Controller
 {
@@ -57,7 +60,8 @@ class BarangController extends Controller
     {
         $title = 'Detail Barang';
         $data = BarangModel::findOrFail($id);
-        return view('master.barang.show', compact('title', 'data'));
+        $history = HistoryBarangModel::where('barang_id', $id)->orderBy('created_at', 'desc')->paginate(5);        
+        return view('master.barang.show', compact('title', 'data', 'history'));
     }
 
     /**
@@ -113,10 +117,48 @@ class BarangController extends Controller
         return response()->json(['stock' => $barang->stok]);
     }
 
-    public static function updateStock($barangId, $quantity, $type = 'Transaksi', $direction = 'in', $referenceId = null, $description = null)
+    public static function updateStock($barangId, $quantity, $parentId = null, $note = null, $type = null, $from = null)
     {
-        (new self)->updateStock($barangId, $quantity, $type, $direction, $referenceId, $description);
+        DB::beginTransaction();
+    
+        try {
+            $barang = BarangModel::findOrFail($barangId);
+            $stockAwal = $barang->stok;
+    
+            if ($type === 'in') {
+                $stockAkhir = $stockAwal + $quantity;
+            } elseif ($type === 'out') {
+                $stockAkhir = $stockAwal - $quantity;
+            } else {
+                throw new \Exception("Tipe transaksi tidak valid: harus 'in' atau 'out'");
+            }
+    
+            $barang->stok = $stockAkhir;
+            $barang->save();
+    
+            HistoryBarangModel::create([
+                'barang_id'    => $barangId,
+                'user_id'      => Auth::id(),
+                'parent_id'    => $parentId,
+                'stock_awal'   => $stockAwal,
+                'quantity'     => $quantity,
+                'stock_akhir'  => $stockAkhir,
+                'note'         => $note ?? 'Update stok otomatis',
+                'from'         => $from ?? 'unknown',
+                'type'         => $type,
+                'created_at'   => now(),
+            ]);
+    
+            DB::commit();
+            return true;
+    
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Update stok gagal: ' . $e->getMessage());
+            return false;
+        }
     }
+    
 
 
 }
