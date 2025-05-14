@@ -58,9 +58,30 @@
                     <h5 class="mb-0">History Stok Barang</h5>
                 </div>
                 <div class="card-body">
-                    <p>Belum ada data history stock. (Contoh konten tab)</p>
-                    <!-- Tambahkan tabel riwayat stok jika tersedia -->
+                    <table class="table table-bordered table-striped table-hover">
+                        <tr>
+                            <th>Parent </th>
+                            <th>Stock Awal</th>
+                            <th>Quantity</th>
+                            <th>Stock Akhir</th>
+                            <th>Keterangan</th>
+                        </tr>
+                        @foreach($history as $item)
+                        <tr>
+                            <td>{{$item->parent->barangMasuk->no_transaksi}} </td>
+                            <td>{{$item->stock_awal}} </td>
+                            <td>{{$item->quantity}} </td>
+                            <td>{{$item->stock_akhir}} </td>
+                            <td>{{$item->note}} </td>
+                            
+                        </tr>
+                        @endforeach
+                    </table>
+                    <div class="justify-content-end mt-2">
+                        {{ $history->links() }}
+                    </div>
                 </div>
+               
             </div>
         </div>
     </div>
