@@ -45,20 +45,40 @@ class BarangKeluarItemModel extends Model
 
         static::updating(function ($model) {
             $model->updated_at = now();  
-            
+        
+            if ($model->barang_id) {
+                $originalQuantity = $model->getOriginal('quantity');
+                $newQuantity = $model->quantity;
+        
+                if ($originalQuantity != $newQuantity) {
+                    $type = $newQuantity > $originalQuantity ? 'out' : 'in';
+                    $action = $type === 'out' ? 'keluar' : 'masuk';
+        
+                    BarangController::updateStock(
+                        $model->barang_id, 
+                        abs($newQuantity - $originalQuantity),
+                        $model->id,
+                        "Barang {$action}: ID {$model->barang_id} berhasil diupdate",
+                        $type,
+                        'transaksi_item'
+                    );
+                }
+            }
+        });
+
+        static::deleting(function ($model) {
             if ($model->barang_id) {
                 BarangController::updateStock(
                     $model->barang_id, 
                     abs($model->quantity),
                     $model->id,
-                    "Barang keluar: ID {$model->barang_id} berhasil di tambahkan",
-                    'out',
-                    'transaksi_item',
-
+                    "Barang keluar: ID {$model->barang_id} dikembalikan karena data dihapus",
+                    'in',
+                    'transaksi_item'
                 );
-                
             }
         });
+        
     }
 
 
