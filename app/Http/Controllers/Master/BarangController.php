@@ -60,7 +60,7 @@ class BarangController extends Controller
     {
         $title = 'Detail Barang';
         $data = BarangModel::findOrFail($id);
-        $history = HistoryBarangModel::where('barang_id', $id)->orderBy('created_at', 'desc')->paginate(5);        
+        $history = HistoryBarangModel::where('barang_id', $id)->paginate(5);        
         return view('master.barang.show', compact('title', 'data', 'history'));
     }
 

@@ -36,7 +36,6 @@ class HistoryBarangModel extends Model
 
     public function parent() 
     {
-        return $this->belongsTo(BarangMasukItemModel::class, 'id');
-
+        return $this->belongsTo(BarangMasukItemModel::class, 'parent_id');
     }
 }

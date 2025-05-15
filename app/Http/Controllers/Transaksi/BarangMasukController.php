@@ -139,6 +139,25 @@ class BarangMasukController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::beginTransaction();
+    
+        try {
+            $barangMasuk = BarangMasukModel::findOrFail($id);
+    
+            foreach ($barangMasuk->barangMasukItems as $item) {
+                $item->delete(); 
+            }
+    
+            $barangMasuk->delete();
+    
+            DB::commit();
+    
+            Alert::success('Berhasil', 'Barang Keluar berhasil dihapus!');
+            return redirect()->back();
+    
+        } catch (\Exception $e) {
+            DB::rollBack(); 
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }
