@@ -32,20 +32,23 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->nama_barang }}</td>
-                                    <td>{{ $item->harga }}</td>
                                     <td>{{ $item->satuan }}</td>
+                                    <td>{{ $item->harga }}</td>
                                     <td>{{ $item->stok }}</td>
                                     <td>{{ $item->deskripsi }}</td>
                                     <td><span class="badge badge-primary">{{ $item->status }}</span></td>
                                     <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                        <div class="btn-group mb-2 mr-2">
+                                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button"
                                                 data-toggle="dropdown">
                                                 <i>Action</i>
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="{{ url('/barang/' . $item->id . '/edit') }}">
                                                     <i class="fas fa-edit"></i> Edit
+                                                </a>
+                                                <a class="dropdown-item" href="{{ url('/barang/' . $item->id) }}">
+                                                    <i class="fas fa-eye"></i> View
                                                 </a>
                                                 <form action="{{ url('/barang/' . $item->id) }}" method="POST">
                                                     @csrf
@@ -55,10 +58,6 @@
                                                         <i class="fas fa-trash"></i> Delete
                                                     </button>
                                                 </form>
-
-                                                <a class="dropdown-item" href="{{ url('/barang/' . $item->id) }}">
-                                                    <i class="fas fa-eye"></i> View
-                                                </a>
                                             </div>
                                         </div>
                                     </td>
