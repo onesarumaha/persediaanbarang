@@ -22,7 +22,8 @@ class BarangController extends Controller
     {
         $title = 'Barang';
         $data = BarangModel::paginate(5);
-        return view('master.barang.index', compact('title', 'data'));
+        $satuans = ['pcs', 'kg', 'box', 'liter'];
+        return view('master.barang.index', compact('title', 'data' , 'satuans'))->with('title', 'Data Barang');
     }
 
     /**
@@ -60,7 +61,7 @@ class BarangController extends Controller
     {
         $title = 'Detail Barang';
         $data = BarangModel::findOrFail($id);
-        $history = HistoryBarangModel::where('barang_id', $id)->orderBy('created_at', 'desc')->paginate(5);        
+        $history = HistoryBarangModel::where('barang_id', $id)->orderBy('created_at', 'desc')->paginate(5);
         return view('master.barang.show', compact('title', 'data', 'history'));
     }
 
@@ -103,7 +104,7 @@ class BarangController extends Controller
         $barang = BarangModel::findOrFail($id);
         $barang->delete();
 
-        return redirect()->route('barang.index')->with('success', 'Barang deleted successfully.');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus.');
     }
 
     public function getStock($id)
@@ -120,11 +121,11 @@ class BarangController extends Controller
     public static function updateStock($barangId, $quantity, $parentId = null, $note = null, $type = null, $from = null)
     {
         DB::beginTransaction();
-    
+
         try {
             $barang = BarangModel::findOrFail($barangId);
             $stockAwal = $barang->stok;
-    
+
             if ($type === 'in') {
                 $stockAkhir = $stockAwal + $quantity;
             } elseif ($type === 'out') {
@@ -132,10 +133,10 @@ class BarangController extends Controller
             } else {
                 throw new \Exception("Tipe transaksi tidak valid: harus 'in' atau 'out'");
             }
-    
+
             $barang->stok = $stockAkhir;
             $barang->save();
-    
+
             HistoryBarangModel::create([
                 'barang_id'    => $barangId,
                 'user_id'      => Auth::id(),
@@ -148,17 +149,17 @@ class BarangController extends Controller
                 'type'         => $type,
                 'created_at'   => now(),
             ]);
-    
+
             DB::commit();
             return true;
-    
+
         } catch (\Exception $e) {
             DB::rollBack();
-            \Log::error('Update stok gagal: ' . $e->getMessage());
+            \log::error('Update stok gagal: ' . $e->getMessage());
             return false;
         }
     }
-    
+
 
 
 }

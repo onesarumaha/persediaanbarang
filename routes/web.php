@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BarangController;
+use App\Http\Controllers\Master\SatuanController;
 use App\Http\Controllers\Master\SupplierController;
 use App\Http\Controllers\Master\UserController;
 use App\Http\Controllers\ProfileController;
@@ -35,6 +36,19 @@ Route::prefix('supplier')->controller(SupplierController::class)->group(function
     Route::put('/{id}', 'update')->name('supplier.update');
     Route::delete('/{id}', 'destroy')->name('supplier.destroy');
 });
+
+//satuan
+Route::prefix('satuan')->controller(\App\Http\Controllers\Master\SatuanController::class)->group(function () {
+    Route::get('/', 'index')->name('satuan.index');
+    Route::get('/create', 'create')->name('satuan.create');
+    Route::post('/', 'store')->name('satuan.store');
+    Route::get('/{id}', 'show')->name('satuan.view');
+    Route::get('/{id}/edit', 'edit')->name('satuan.edit');
+    Route::put('/{id}', 'update')->name('satuan.update');
+    Route::delete('/{id}', 'destroy')->name('satuan.destroy');
+    Route::get('/{id}/delete', 'destroy')->name('satuan.delete');
+});
+
 
 
 Route::middleware('auth')->group(function () {
@@ -69,11 +83,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
     Route::get('/user/view/{id}', [UserController::class, 'show'])->name('user.show');
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-    
-    
-
 });
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
