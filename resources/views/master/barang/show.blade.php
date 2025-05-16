@@ -60,19 +60,19 @@
                 <div class="card-body">
                     <table class="table table-bordered table-striped table-hover">
                         <tr>
-                            <th>Parent </th>
                             <th>Stock Awal</th>
                             <th>Quantity</th>
                             <th>Stock Akhir</th>
                             <th>Keterangan</th>
+                            <th>Waktu</th>
                         </tr>
                         @foreach($history as $item)
                         <tr>
-                            <td>{{$item->parent->barangMasuk->no_transaksi}} </td>
                             <td>{{$item->stock_awal}} </td>
                             <td>{{$item->quantity}} </td>
                             <td>{{$item->stock_akhir}} </td>
                             <td>{{$item->note}} </td>
+                            <td>{{$item->created_at}} </td>
                             
                         </tr>
                         @endforeach

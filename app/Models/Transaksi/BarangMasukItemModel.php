@@ -45,15 +45,36 @@ class BarangMasukItemModel extends Model
 
         static::updating(function ($model) {
             $model->updated_at = now();  
-            
+        
+            if ($model->barang_id) {
+                $originalQuantity = $model->getOriginal('quantity');
+                $newQuantity = $model->quantity;
+        
+                if ($originalQuantity != $newQuantity) {
+                    $type = $newQuantity > $originalQuantity ? 'in' : 'out';
+                    $action = $type === 'out' ? 'keluar' : 'masuk';
+        
+                    BarangController::updateStock(
+                        $model->barang_id, 
+                        abs($newQuantity - $originalQuantity),
+                        $model->id,
+                        "Barang {$action}: ID {$model->barang_id} berhasil diupdate",
+                        $type,
+                        'transaksi_item'
+                    );
+                }
+            }
+        });
+
+        static::deleting(function ($model) {
             if ($model->barang_id) {
                 BarangController::updateStock(
                     $model->barang_id, 
-                    $model->quantity,     
-                    'Transaksi',    
-                    'in',                 
-                    $model->invoice_id,  
-                    "Invoice ID {$model->invoice_id} item has been updated"
+                    abs($model->quantity),
+                    $model->id,
+                    "Barang keluar: ID {$model->barang_id} dikembalikan karena data dihapus",
+                    'out',
+                    'transaksi_item'
                 );
             }
         });

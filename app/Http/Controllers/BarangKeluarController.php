@@ -141,7 +141,9 @@ class BarangKeluarController extends Controller
         try {
             $barangKeluar = BarangKeluarModel::findOrFail($id);
     
-            $barangKeluar->barangKeluarItems()->delete(); 
+            foreach ($barangKeluar->barangKeluarItems as $item) {
+                $item->delete(); 
+            }
     
             $barangKeluar->delete();
     
