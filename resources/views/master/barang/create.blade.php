@@ -4,7 +4,7 @@
 @section('content')
     <div class="col-md-12">
         <div class="card mt-4 shadow">
-            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <div class="card-header text-white d-flex justify-content-between align-items-center">
                 <h5 class="card-title">Input Barang</h5>
                 <a href="{{ url('/barang') }}" class="btn btn-secondary btn-sm" data-toggle="tooltip">
                     <span class="icon text-white-50">

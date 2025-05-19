@@ -61,7 +61,7 @@
             </script>
         @endif
         <div class="card">
-            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+            <div class="card-header text-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">{{ $title }}</h5>
                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#satuanModal">
                     <span class="icon text-white-50">
@@ -77,7 +77,7 @@
                         <form action="{{ route('satuan.store') }}" method="POST">
                             @csrf
                             <div class="modal-content">
-                                <div class="modal-header bg-info text-white">
+                                <div class="modal-header text-white">
                                     <h5 class="modal-title" id="satuanModalLabel">Tambah Satuan Barang</h5>
                                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>

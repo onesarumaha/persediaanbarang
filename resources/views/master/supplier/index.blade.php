@@ -5,7 +5,7 @@
 @section('content')
     <div class="col-md-12">
         <div class="card shadow">
-            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+            <div class="card-header text-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">{{ $title }}</h5>
                 <a href="{{ url('/supplier/create') }}" class="btn btn-primary btn-sm" data-toggle="tooltip">
                     <span class="icon text-white-50">
