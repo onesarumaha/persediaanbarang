@@ -69,6 +69,7 @@
                     </span>
                     Satuan
                 </button>
+
                 <!-- Modal -->
                 <div class="modal fade" id="satuanModal" tabindex="-1" role="dialog" aria-labelledby="satuanModalLabel"
                     aria-hidden="true">
@@ -84,7 +85,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <label for="satuan">Satuan</label>
+                                        <label for="satuan" class="text-dark">Satuan</label>
                                         <input type="text" class="form-control" id="satuan" name="satuan"
                                             placeholder="Masukkan satuan barang" required>
                                     </div>
@@ -99,6 +100,11 @@
                 </div>
             </div>
             <div class="card-body">
+                <form action="{{ url('/satuan') }}" method="GET" class="form-inline mb-3">
+                    <input type="text" name="search" class="form-control mr-2" placeholder="Cari satuan..."
+                        value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </form>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>

@@ -12,10 +12,17 @@
                     <span class="icon text-white-50">
                         <i class="fas fa-plus"></i>
                     </span>
-                    Tambah</a>
+                    Tambah
+                </a>
             </div>
             <div class ="card-body">
                 <div class="table-responsive">
+                    <form action="{{ url('/barang') }}" method="GET" class="form-inline mb-3">
+                        <input type="text" name="search" class="form-control mr-2" placeholder="Cari barang..."
+                            value="{{ request('search') }}">
+                        <button type="submit" class="btn btn-primary">Cari</button>
+                    </form>
+
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -44,7 +51,8 @@
                                                 <i>Action</i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ url('/barang/' . $item->id . '/edit') }}">
+                                                <a class="dropdown-item"
+                                                    href="{{ url('/barang/' . $item->id . '/edit') }}">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
                                                 <a class="dropdown-item" href="{{ url('/barang/' . $item->id) }}">

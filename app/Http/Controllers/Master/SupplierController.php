@@ -11,11 +11,18 @@ class SupplierController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $title = 'Supplier';
-        $data = SupplierModel::paginate(5);
-        return view('master.supplier.index', compact('title', 'data'));
+        $title = 'Data Supplier';
+        $search = $request->input('search');
+
+        $data = SupplierModel::when($search, function ($query, $search) {
+            return $query->where('nama_supplier', 'like', "%{$search}%")
+                ->orWhere('no_telp', 'like', "%{$search}%")
+                ->orWhere('alamat', 'like', "%{$search}%");
+        })->paginate(5);
+
+        return view('master.supplier.index', compact('title', 'data', 'search'));
     }
 
     /**
