@@ -11,11 +11,16 @@ class SatuanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $title = 'Satuan';
-        $data = SatuanModel::paginate(5);
-        return view('master.satuan.index', compact('title', 'data'))->with('title', 'Data Satuan');
+        $title = 'Data Satuan';
+        $search = $request->input('search');
+
+         $data = SatuanModel::when($search, function ($query, $search) {
+            return $query->where('satuan', 'like', "%{$search}%");
+        })->paginate(5);
+
+         return view('master.satuan.index', compact('title', 'data', 'search'));
     }
 
     /**

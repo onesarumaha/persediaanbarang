@@ -18,12 +18,23 @@ class BarangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $title = 'Barang';
-        $data = BarangModel::paginate(5);
-        $satuans = ['pcs', 'kg', 'box', 'liter'];
-        return view('master.barang.index', compact('title', 'data' , 'satuans'))->with('title', 'Data Barang');
+    $title = 'Data Barang';
+    $satuans = ['pcs', 'kg', 'box', 'liter'];
+
+    $query = BarangModel::query();
+
+    if ($request->has('search') && $request->search != '') {
+        $query->where('nama_barang', 'like', '%' . $request->search . '%')
+              ->orWhere('satuan', 'like', '%' . $request->search . '%')
+              ->orWhere('deskripsi', 'like', '%' . $request->search . '%');
+    }
+
+    $data = $query->paginate(5)->withQueryString();
+
+    return view('master.barang.index', compact('title', 'data', 'satuans'));
+
     }
 
     /**

@@ -22,9 +22,6 @@
                             <li class=""><a href="{{url('/barang')}}" class="">Barang</a></li>
                             <li class=""><a href="{{url('/supplier')}}" class="">Supplier</a></li>
                             <li class=""><a href="{{url('/satuan')}}" class="">Satuan</a></li>
-                            <li class=""><a href="{{url('/customer')}}" class="">Customer</a></li>
-                            <li class=""><a href="{{url('/pembelian')}}" class="">Pembelian</a></li>
-                            <li class=""><a href="{{url('/pembelian-item')}}" class="">Pembelian Item</a></li>
                         </ul>
                     </li>
                     <li class="nav-item pcoded-hasmenu">

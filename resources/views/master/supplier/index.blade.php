@@ -14,6 +14,11 @@
                     Tambah</a>
             </div>
             <div class="card-body table-border-style">
+                <form action="{{ url('/supplier') }}" method="GET" class="form-inline mb-3">
+                    <input type="text" name="search" class="form-control mr-2" placeholder="Cari supplier..."
+                        value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </form>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -65,7 +70,7 @@
 
                     {{-- Pagination --}}
                     <div class="justify-content-end">
-                        {{ $data->links() }}
+                        {{ $data->appends(['search' => request('search')])->links() }}
                     </div>
                 </div>
             </div>
