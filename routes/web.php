@@ -8,6 +8,7 @@ use App\Http\Controllers\Master\SupplierController;
 use App\Http\Controllers\Master\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Transaksi\BarangMasukController;
+use App\Http\Controllers\Transaksi\StockOpnameController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -83,6 +84,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
     Route::get('/user/view/{id}', [UserController::class, 'show'])->name('user.show');
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+    // stock opname
+    Route::resource('stock-opname', StockOpnameController::class);
+    Route::post('/stock-opname/{id}', [StockOpnameController::class, 'approve'])->name('stock-opname.approve');
+
 });
 
 

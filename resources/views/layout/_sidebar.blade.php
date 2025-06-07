@@ -29,6 +29,7 @@
                         <ul class="pcoded-submenu">
                             <li class=""><a href="{{url('/barang-keluar')}}" class="">Barang Keluar</a></li>
                             <li class=""><a href="{{url('/barang-masuk')}}" class="">Barang Masuk</a></li>
+                            <li class=""><a href="{{url('/stock-opname')}}" class="">Stock Opname</a></li>
                         </ul>
                     </li>
 
