@@ -85,6 +85,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
+//laporan
+Route::get('/laporan', [\App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
+Route::get('/laporan/create', [\App\Http\Controllers\LaporanController::class, 'create'])->name('laporan.create');
+Route::post('/laporan/store', [\App\Http\Controllers\LaporanController::class, 'store'])->name('laporan.store');
+Route::get('/laporan/{id}', [\App\Http\Controllers\LaporanController::class, 'show'])->name('laporan.view');
+Route::get('/laporan/{id}/edit', [\App\Http\Controllers\LaporanController::class, 'edit'])->name('laporan.edit');
+Route::put('/laporan/{id}', [\App\Http\Controllers\LaporanController::class, 'update'])->name('laporan.update');
+
+
 
 
 require __DIR__ . '/auth.php';
